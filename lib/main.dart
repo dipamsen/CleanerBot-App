@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bluetoothadapter/bluetoothadapter.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-
-void main() => runApp(MaterialApp(
-    home: CleanerBot()
-));
+void main() => runApp(MaterialApp(home: CleanerBot()));
 
 class CleanerBot extends StatefulWidget {
   @override
@@ -12,9 +9,10 @@ class CleanerBot extends StatefulWidget {
 }
 
 class _CleanerBotState extends State<CleanerBot> {
-
-  Bluetoothadapter flutterbluetoothadapter = Bluetoothadapter();
-
+  String _connectionStatus = "NONE";
+  void getDevices() async {
+    print("Dipam Sen");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,27 +20,22 @@ class _CleanerBotState extends State<CleanerBot> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text(
-          'CleanerBot',
+          'Cleaner Bot',
           style: TextStyle(
-            fontFamily: 'AlgreyaSans',
-            fontWeight: FontWeight.bold,
-            fontSize: 20
-          ),
+              fontFamily: 'AlgreyaSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 24),
         ),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
-      body: Column(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RaisedButton(
-            child: Text("Click Me"),
-            onPressed: (){
-              flutterbluetoothadapter.getDevices().then((value) {
-                value.forEach((element) {
-                  print(element);
-                });
-              });
-            },
+            child: Text(_connectionStatus,
+                style: TextStyle(fontFamily: "AlgreyaSans", fontSize: 20)),
+            onPressed: getDevices,
           )
         ],
       ),
